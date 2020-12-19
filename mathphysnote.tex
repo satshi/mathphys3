@@ -1695,12 +1695,55 @@ $k<n$ですから式\eqref{temporthdiff}より$(g,F_k)=(F_n,q)=0$となり、②
 \begin{align}
   P^{\alpha,\beta}_n(x)=\frac{1}{2^n n!(1-x)^{\alpha}(1+x)^{\beta}}\qty(\dv{x})^n((1-x)^{\alpha}(1+x)^{\beta}(x^2-1)^n)
 \end{align}
-です。
+です。ヤコビ多項式の生成母関数は
+\begin{align}
+  \sum_{n=0}^{\infty}P_{n}^{(\alpha,\beta)}(x)t^n=
+  \frac{2^{\alpha+\beta}}{\sqrt{1-2xt+t^2}(1+\sqrt{1-2xt+t^2}-z)(1+\sqrt{1-2xt+t^2}+z)}
+\end{align}
+と表せます。
 
+ヤコビ多項式のうちよく現れる特殊な場合には名前がついています。例えば$\alpha=\beta=\lambda-\frac12$の場合には、ゲーゲンバウアー（Gegenbauer）多項式あるいや超球多項式と呼ばれます。つまり、ゲーゲンバウアー多項式は、区間が$(-1,1)$で重み関数が$\rho(x)=(1-x^2)^{\lambda-\frac12}$の直交多項式です。よく使われる記号と規格化は
+\begin{align}
+  C^{(\lambda)}_{n}=\frac{(2\lambda)_n}{2^n (\lambda+\frac12)_n n!(1-x^2)^{\lambda-\frac12}}
+  \qty(\dv{x})^n((1-x^2)^{\lambda-\frac12}(x^2-1)^n)
+\end{align}
+です。ここで$(a)_n$はポッホハマー記号と呼ばれる記号で、
+\begin{align}
+  (a)_n:=\frac{\Gamma(a+n)}{\Gamma(a)}=a(a+1)\dots(a+n-1)
+\end{align}
+で定義されています。ゲーゲンバウアー多項式の生成母関数は
+\begin{align}
+  \sum_{n=0}^{\infty}C^{(\lambda)}_{n}=(1-2xt+t^2)^{-\lambda}
+\end{align}
+と表せます。
+
+さらにゲーゲンバウアー多項式で$\lambda=0$としたものはチェビシェフ（Chebyshev）多項式と呼ばれます。つまりチェビシェフ多項式は区間$(-1,1)$で重み関数が$\rho(x)=(1-x^2)^{-\frac12}$の場合の直交多項式です
+
+。よく使われる記号と規格化は
+\begin{align}
+  T_n(x)=\frac{1}{2^n(\frac12)_n}(1-x^2)^{\frac12}
+  \qty(\dv{x})^n((1-x^2)^{-\frac12}(x^2-1)^n)
+\end{align}
+です。チェビシェフ多項式の生成母関数は
+\begin{align}
+  \sum_{n=0}^{\infty}T_n(x)t^n = \frac{1-xt}{1-2xt+t^2}
+\end{align}
+と表せます。
 
 \subsection{ソニン多項式とその仲間}
-
-
+区間$(0,\infty)$で重み関数$\rho(x)=x^{\alpha}e^{-x},\ \alpha>-1$を考えます。このときの直交多項式を一般にソニン（Sonine）多項式と呼びます。これは、ラゲール多項式を一般化したものということができます。これは次のようにロドリゲス条件を満たします。
+\begin{align}
+  \frac{\rho'(x)}{\rho(x)}=\frac{A(x)}{B(x)},\quad A(x)=\alpha-x,\quad B(x)=x.
+\end{align}
+ですから、ソニン多項式はロドリゲスの公式で表すことができます。よく使われる記号と規格化は
+\begin{align}
+  S^{(\alpha)}_{n}(x)=\frac{1}{n!}x^{-\alpha}e^{x}\qty(\dv{x})^n(x^{\alpha+n}e^{-x})
+\end{align}
+です。生成母関数は
+\begin{align}
+  \sum_{n=0}^{\infty}S^{\alpha}_{n}(x)t^n=(1-t)^{-\alpha-1}e^{\frac{xt}{t-1}}
+\end{align}
+と表せます。
 
 \chapter{微分方程式}\label{sec:ode}
 \section{言葉など}
