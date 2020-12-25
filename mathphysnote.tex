@@ -1702,7 +1702,7 @@ $k<n$ですから式\eqref{temporthdiff}より$(g,F_k)=(F_n,q)=0$となり、②
 \end{align}
 と表せます。
 
-ヤコビ多項式のうちよく現れる特殊な場合には名前がついています。例えば$\alpha=\beta=\lambda-\frac12$の場合には、ゲーゲンバウアー（Gegenbauer）多項式あるいや超球多項式と呼ばれます。つまり、ゲーゲンバウアー多項式は、区間が$(-1,1)$で重み関数が$\rho(x)=(1-x^2)^{\lambda-\frac12}$の直交多項式です。よく使われる記号と規格化は
+ヤコビ多項式のうちよく現れる特殊な場合には名前がついています。例えば$\alpha=\beta=\lambda-\frac12$の場合には、ゲーゲンバウアー（Gegenbauer）多項式と呼ばれます。つまり、ゲーゲンバウアー多項式は、区間が$(-1,1)$で重み関数が$\rho(x)=(1-x^2)^{\lambda-\frac12}$の直交多項式です。よく使われる記号と規格化は
 \begin{align}
   C^{(\lambda)}_{n}=\frac{(2\lambda)_n}{2^n (\lambda+\frac12)_n n!(1-x^2)^{\lambda-\frac12}}
   \qty(\dv{x})^n((1-x^2)^{\lambda-\frac12}(x^2-1)^n)
@@ -1713,7 +1713,7 @@ $k<n$ですから式\eqref{temporthdiff}より$(g,F_k)=(F_n,q)=0$となり、②
 \end{align}
 で定義されています。ゲーゲンバウアー多項式の生成母関数は
 \begin{align}
-  \sum_{n=0}^{\infty}C^{(\lambda)}_{n}=(1-2xt+t^2)^{-\lambda}
+  \sum_{n=0}^{\infty}C^{(\lambda)}_{n}t^n=(1-2xt+t^2)^{-\lambda}
 \end{align}
 と表せます。
 
@@ -1721,10 +1721,15 @@ $k<n$ですから式\eqref{temporthdiff}より$(g,F_k)=(F_n,q)=0$となり、②
 
 。よく使われる記号と規格化は
 \begin{align}
-  T_n(x)=\frac{1}{2^n(\frac12)_n}(1-x^2)^{\frac12}
+  T_n(x)=\frac{1}{(2n-1)!!}(1-x^2)^{\frac12}
   \qty(\dv{x})^n((1-x^2)^{-\frac12}(x^2-1)^n)
 \end{align}
-です。チェビシェフ多項式の生成母関数は
+です。ここで$!!$の記号は二重階乗と呼ばれるもので
+\begin{align}
+  (2n-1)!!:=1\cdot 3\cdot 5 \cdot \dots \cdot (2n-1)
+  =2^n(\frac12)_n=\frac{(2n)!}{2^n n!}
+\end{align}
+を表します。チェビシェフ多項式の生成母関数は
 \begin{align}
   \sum_{n=0}^{\infty}T_n(x)t^n = \frac{1-xt}{1-2xt+t^2}
 \end{align}
@@ -1737,13 +1742,24 @@ $k<n$ですから式\eqref{temporthdiff}より$(g,F_k)=(F_n,q)=0$となり、②
 \end{align}
 ですから、ソニン多項式はロドリゲスの公式で表すことができます。よく使われる記号と規格化は
 \begin{align}
-  S^{(\alpha)}_{n}(x)=\frac{1}{n!}x^{-\alpha}e^{x}\qty(\dv{x})^n(x^{\alpha+n}e^{-x})
+  S^{\alpha}_{n}(x)=\frac{1}{n!}x^{-\alpha}e^{x}\qty(\dv{x})^n(x^{\alpha+n}e^{-x})
 \end{align}
 です。生成母関数は
 \begin{align}
   \sum_{n=0}^{\infty}S^{\alpha}_{n}(x)t^n=(1-t)^{-\alpha-1}e^{\frac{xt}{t-1}}
 \end{align}
 と表せます。
+
+多くの量子力学の教科書水素原子のところに出てくるラゲール陪多項式は、ソニン多項式と関係があって、$m,n$が非負の整数で$n\ge m$を満たすとき
+\begin{align}
+  L^{m}_{n}(x)=(-1)^m n! S^{m}_{n-m}(x)
+\end{align}
+となります。ただし、このあたりの言葉遣いは文献によって異なっていて、例えば
+\url{https://dlmf.nist.gov/}やWikipedia、岩波公式集などでは、
+\begin{align}
+  L_{n}^{(\alpha)}(x)=S^{\alpha}_{n}(x)
+\end{align}
+と書いて、これを単にラゲール多項式（Laguerre polynomials）、一般化されたラゲール多項式（generalized Laguerre polynomials）、ラゲール陪多項式（associated Laguerre polynomials）と呼んでいるので注意が必要です。
 
 \chapter{微分方程式}\label{sec:ode}
 \section{言葉など}
