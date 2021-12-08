@@ -10,6 +10,14 @@
 \usepackage[libertine]{newtxmath}
 \usepackage{hyperref}
 \usepackage{pxjahyper}
+\hypersetup{%
+ %setpagesize=false,
+ %bookmarksnumbered=true,%
+ %bookmarksopen=true,%
+ colorlinks=true,%
+ linkcolor=blue,
+ citecolor=blue,
+}
 
 \usepackage{graphicx}
 \graphicspath{{fig/}}
@@ -88,6 +96,7 @@
 \newcommand{\CP}{\Cb \mathrm{P}}
 \newcommand{\strong}[1]{\textsf{\bfseries #1}}
 \newcommand{\rb}{\vvmathbb{r}}
+\renewcommand{\vb}{\vvmathbb{v}}
 \newcommand{\yv}{\vec{y}}
 \newcommand{\yt}{\tilde{y}}
 \newcommand{\HG}{{}_2F_1}
@@ -268,7 +277,7 @@
 
 この講義では全く触れませんが、Mathematica, Maple, Maxima, SageMathなどの数式処理ソフト、あるいはその他のプログラミング言語を使うのは非常に便利です。特に関数のグラフを描かせてみることは、直感を得るのに非常に役立ちます。また解けない微分方程式があったとき、数値的に解いてみるというのは、実用的に非常に有用です。
 
-\chapter{複素関数論}
+\chapter{複素関数論}\label{ch:complexanalysis}
 ここでは、数理物理２で習った複素関数論を復習します。さらに、リーマン球面、解析接続、リーマン面といった、少し進んだトピックも取り扱います。すでに習ったところの証明などは飛ばします。新しい部分で有用だと思われるものについては、証明も紹介します。
 
 \section{正則関数}
@@ -691,8 +700,27 @@ $f(z)=\sqrt{z}$という「関数」があったとき$f(-4)$はいくつか？�
   \item 複素平面に$\infty$を付け加えた「リーマン球面」は便利な概念です。
   \item 関数を調べる際には「特異点」を調べるのが重要です。
 \end{itemize}
-
-
+\section{演習問題}\label{ex:complexanalysis}
+\begin{enumerate}
+  \setlength{\itemsep}{1cm}
+    \item 関数$f(z)=\sqrt{z^2-1}$について考えよう。ただし、$z$が実数で$z>1$のとき$f(z)>0$となる分枝をとる。これは図\ref{fig:domain}のように複素平面から実軸上$-1\le z \le 1$の区間を除いた部分で正則である。
+    \begin{figure}[htbp]
+      \centering
+      \includegraphics[width=7cm]{cut2.pdf}
+      \caption{}
+      \label{fig:domain}
+    \end{figure}
+      \begin{enumerate}
+      \item 実数$x\ (-1<x<1)$に対して、
+      \begin{align*}
+        f(x+i0):=\lim_{\epsilon \to +0}f(x+i \epsilon),\quad f(x-i0):=\lim_{\epsilon \to +0}f(x-i \epsilon)
+      \end{align*} 
+      の値をそれぞれ求めよ。
+      \item 図\ref{fig:domain}のような経路$C$での積分$\oint_{C}f(z)dz$の値を求めよ。
+    \end{enumerate}
+    \item $g(z)=\sqrt{(1-z^2)(1-k^2z^2)}\ (0<k<1)$のRiemann面を作ることを考えよう。何枚のシートが必要か。また、分岐点はどこか。それらを貼り合わせてRiemann面を作る、作り方の例を１つ考え、説明せよ。
+\end{enumerate}
+  
 \chapter{ガンマ関数とその周辺}
 特殊関数の中で最もよく物理に現れるのがガンマ関数です。この節では、このガンマ関数について様々な性質を見ていきます。
 \section{定義など}
@@ -1171,6 +1199,43 @@ $f(s)=\frac{s^{-z}}{1+s}$を図\ref{fig:betaz1-z}の$C$にそって積分する�
   \item ガンマ関数に関して、様々な公式があります。
   \item ガンマ関数と関係が深いベータ関数という関数があります。
 \end{itemize}
+
+\section{演習問題}\label{ex:gamma}
+\begin{enumerate}
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics{contournegative.pdf}
+    \caption{積分経路$C$}
+    \label{fig:contour}
+  \end{figure}
+  \item 次の積分を考える。
+  \begin{align}
+    I(s)=\int_{C} dz \, z^{s-1}e^{z}.
+    \tag{♯}\label{contourint}
+  \end{align}
+  ただし、$C$は、図\ref{fig:contour}のように実軸の負の部分にカットを入れた$z$平面でこのカットを囲むようにとる。これ以外の特異点は$C$の内側にないようにする。$z$が正の実数のときに$\log z$が実数になるような分枝をとる。
+  \begin{enumerate}
+    \item \eqref{contourint}の積分は任意の複素数$s$について収束することを説明せよ。
+    \item \label{integral_formula} $I(s)$をガンマ関数などを用いて表わせ。（カットの入った積分の練習をしてもらうのがこの問題の趣旨なのでハンケルの積分表示などを使う場合は、結果だけでなく、その証明も含めて記述すること。）
+    \item この結果を利用して、$\Gamma(s)$は$s=-n\ (n=0,1,2,3,\dots)$で１位の極であることを説明し、留数を求めよ。
+    
+    ヒント：$z^{\alpha}$は$\alpha$が整数のときカットが消えることを考慮せよ。
+    \item ゼータ関数$\zeta(s)$は、$\Re s>1$のときは無限級数の和
+    \begin{align*}
+      \zeta(s)=\sum_{n=1}^{\infty}\frac{1}{n^s}
+    \end{align*}
+    で定義され、そこから解析接続により出来る限り定義域を広げる。積分
+    \begin{align*}
+      J(s)=\int_{C}dz \frac{z^{s-1}e^{z}}{1-e^{z}}
+    \end{align*}
+    をゼータ関数、ガンマ関数などを用いて表わせ。
+
+    ヒント：$\Re z<0$のとき$\frac{e^{z}}{1-e^{z}}=\sum_{n=1}^{\infty}e^{nz}$である。$\Re s$ が十分大きいとき、$\Re z <0 $の範囲内で和と積分を入れ替えて良いことは証明なしで用いてよい。興味があれば証明に挑戦してみよ。
+    \item この結果を用いて$\zeta(-1)$の値を求めよ。ヒント：ガンマ関数の相補公式を用いよ。
+  \end{enumerate}
+\end{enumerate}
+
+
 
 
 \chapter{直交多項式}
@@ -2024,6 +2089,43 @@ $\yv$を$N$成分の従属変数とします。$M$を$N\times N$の定数行列�
   \item 微分方程式の解法をいくつか紹介しました。
 \end{itemize}
 
+\section{演習問題}\label{ex:ode}
+次の微分方程式の一般解を求めよ。$x$が独立変数、$y,y_1,y_2$が従属変数である。
+\begin{enumerate}
+  \setlength{\itemsep}{10mm}
+  \item \qquad $\displaystyle y'=x+xy^2$
+  \item \qquad $\displaystyle y'=y^2+\frac{y}{x}$
+  \item \qquad $\displaystyle y''+y'-6y=0$
+  \item \qquad $\displaystyle y''+4y'+4y=0$
+  \item \qquad $\displaystyle \mqty(y_1'\\ y_2')=\mqty(
+    2 & 2 \\
+    2 & -1
+  )
+    \mqty(y_1\\y_2)
+  $
+  
+  % \item $\displaystyle y''-4y'+4y=0$
+  % \item 
+  % $\displaystyle
+  % \begin{pmatrix}
+  %   y_1'\\
+  %   y_2'
+  % \end{pmatrix}
+  % =
+  % \begin{pmatrix}
+  %   1 & -1 \\
+  %   -1 & 1
+  % \end{pmatrix}
+  % \begin{pmatrix}
+  %   y_1\\
+  %   y_2
+  % \end{pmatrix}
+  % $
+  % \item $\displaystyle y'=y^2+\frac{y}{x}$
+  \end{enumerate}
+  
+
+
 \chapter{２階線形微分方程式と特異点}
 前章\ref{elementarylinear}項で見たように、定数係数の線形微分方程式は初等的に解けます。また、定数でない係数の１階の微分方程式も初等的に解けます。ということは、「解けない」微分方程式の中で一番簡単そうなのは、２階の微分方程式で係数が定数でないものということになります。これを調べることによって、今まで知らなかった関数を発見できます。
 この章では、２階の線形微分方程式に注目して、その性質を調べていきます。ここでは、独立変数も従属変数も複素数とします。
@@ -2731,6 +2833,25 @@ $\CH(a,c;x)$は一般の$a,c$に対して新しい関数です。特殊な$a,c$�
   \item 超幾何関数、合流型超幾何関数という、特殊関数の親玉みたいな関数があります。
 \end{itemize}
 
+\section{演習問題}\label{ex:hypergeometric}
+超幾何微分方程式
+\begin{align}
+  x(1-x)y'' + \left(c-(a+b+1)x\right)y' - aby=0\tag{＊}
+% \label{ode}
+\end{align}
+について調べてみよう。$a,b,c$は複素数の定数である。
+\begin{enumerate}
+  \item $x=0$のまわりで$\lambda$を定数として
+        \begin{align}
+          y=x^{\lambda}\sum_{n=0}^{\infty}a_{n}x^{n}\tag{♯}
+          \label{powerseriesex}
+        \end{align}
+        と書ける解について考えよう。このとき、$x$の最低次から決まる、$\lambda$の値を求めよ。
+  \item $a,b,c$が一般的な値の場合（特殊な関係を持たない場合）、$a_n$についての漸化式を求めよ。
+  \item $a,b,c$が一般的な値の場合、$y(0)=1$を満たす\eqref{powerseriesex}の形の解を$\HG(a,b,c;x)$と書くことにする。$\HG(a,b,c;x)$をべき級数の形で表わせ。
+  \item $a,b,c$が一般的な値の場合、もう一つの解を$\HG$を用いて表わせ。
+  \item $a,b,c$が特殊な値の場合、\eqref{ode}は$\HG(a,b,c;x)$を一つの解としてもつが、もう一つの解は\eqref{powerseriesex}の形で表せないという場合がある。このような$a,b,c$の値の（最も簡単だと思う）例を一つ挙げよ。その例についての二つめの解をフロベニウスの方法を用いて求めよ。 
+\end{enumerate}
 
 \chapter{ベッセル関数}
 \section{生成母関数}
@@ -3079,5 +3200,399 @@ $\nu=n\in \Zb$の場合に、もう１つの解を見つけるには、どうす
   \item 物理にベッセル関数が現れる例として、円板内のラプラシアンの固有値問題を紹介しました。
   \item ハンケル関数$H^{(1)}_{\nu}(x),\ H^{(2)}_{\nu}(x)$、変形ベッセル関数$I_{\nu}(x),\ K_{\nu}(x)$もよく現れる関数です。
 \end{itemize}
+
+\appendix
+\chapter{演習問題の解答}
+\section*{演習問題\ref{ex:complexanalysis}の解答}
+\begin{enumerate}
+  \item 
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=7cm]{continuation.pdf}
+    \caption{}
+    \label{continuation}
+  \end{figure}
+  \begin{enumerate}
+  \item $f(x+i0)$を考える場合、図\ref{continuation}のように上から解析接続する。そのためには例えば$z-1=re^{i\theta}\ (0<r<1)$として$\theta$を$0$から$\pi$まで連続的に動かせば$x+i0 = 1-r+i0$ での値が求まる。このとき
+  \begin{align*}
+    f(x+i0)
+    &=\lim_{\theta\to \pi} \sqrt{(z+1)(z-1)}
+    =\lim_{\theta\to \pi} \sqrt{(re^{i\theta}+2)re^{i\theta}}\\
+    &=\lim_{\theta\to \pi} \sqrt{(re^{i\theta}+2)r}e^{i\theta/2}
+    =e^{i\pi/2}\sqrt{(2-r)r}\\
+    &=i\sqrt{(1-x)(1+x)}=i\sqrt{1-x^2}.\\
+  \end{align*}
+  同様に$f(x-i0)=f(1-r-i0)$にするには、$\theta$を$0$から$-\pi$まで連続的に動かせばよい。
+  \begin{align}
+    f(x-i0)=-i\sqrt{1-x^2}.
+  \end{align}
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=5cm]{contour2.pdf}
+    \caption{}
+    \label{contour2}
+  \end{figure}
+  \item 経路を図\ref{contour2}のようにカットのすぐ上とカットのすぐ下の差に変形する。
+  \begin{align*}
+    \oint_{C}f(z)dz=\int_{-1}^{1}f(x-i0)dx+\int_{1}^{-1}f(x+i0)dx
+    =-2i\int_{-1}^{1}\sqrt{1-x^2}dx
+    =-\pi i
+  \end{align*}
+  \end{enumerate}
+  \item $g(z)^2=(1-z^2)(1-k^2z^2)$は１価関数なので、$g(z)$は全体の符号が異なる２価関数である。なのでシートの数は２枚。$g(z)$は
+  \begin{align*}
+    g(z)=k\sqrt{(1-z)(1+z)(1/k-z)(1/k+z)}
+  \end{align*}
+  と書けるので、分岐点は根号の中が一位の$0$点になる$\pm 1,\pm 1/k$である。今、$-1/k < -1<+1<+1/k$の順序になっている。図\ref{torus1}のように$[-1/k,-1]$と$[1,1/k]$にカットを入れたシートを２枚用意し、対応する番号がつながるようにつなぐ。
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=6cm]{trus1.pdf}
+    \caption{}
+    \label{torus1}
+  \end{figure}
+  立体的な図をがんばって描くと図\ref{surfaceex}のようになる。
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=10cm]{surface.pdf}
+    \caption{}
+    \label{surfaceex}
+  \end{figure}
+\end{enumerate}
+
+\section*{演習問題\ref{ex:gamma}の解答}
+\begin{enumerate}
+  \item 
+  \begin{enumerate}
+    \item 積分路は特異点を通らないので問題となるのは$z\to -\infty$の部分である。しかし、$e^z$がこの部分で急激に小さくなるので積分は収束する。
+    \begin{figure}[htbp]
+      \centering
+      \includegraphics{c1c2c3.pdf}
+      \caption{}
+      \label{c1c2c3}
+    \end{figure}
+    \item $\Re s >0 $で積分を評価する。問題に与えられたようなカットで$f(z)=z^{s-1}e^{z}$とすると$t>0$として$f(-t\pm i0)=(te^{\pm i\pi})^{s-1}e^{-t}=e^{\pm i\pi(s-1)}t^{s-1}e^{-t}=-e^{\pm i\pi s}t^{s-1}e^{-t}$である。図\ref{c1c2c3}のように積分路を変形して評価する。$\Re s>0$なので$C_2$の半径$\epsilon\to 0$の極限で
+    \begin{align*}
+      \int_{C_2}f(z)dz\to 0
+    \end{align*}
+    となる。$C_1$は、
+    \begin{align*}
+      \int_{C_1}f(z)dz=\int_{\infty}^{\epsilon}f(-t-i0)(-dt)\to
+      -e^{-\pi i s}\int_{0}^{\infty}t^{s-1}e^{-t}dt=-e^{-\pi i s}\Gamma(s)
+    \end{align*}
+    となる。同様の計算で$C_3$の積分は
+    \begin{align*}
+      \int_{C_3}f(z)dz\to e^{\pi i s}\Gamma(s)
+    \end{align*}
+    となる。したがって
+    \begin{align*}
+      I(s)=(e^{\pi i s}-e^{-\pi i s})\Gamma(s)=2i \sin \pi s \Gamma(s)
+    \end{align*}
+    が得られる。今は$\Re s >0$で示したが、一致の定理により上の式が意味のある全ての領域で成り立つ。
+    \item $s$が$-n$の近くで
+    \begin{align*}
+      \sin \pi s = (-1)^n \pi (s+n) + O((s+n)^3)
+    \end{align*}
+    が成り立つので
+    \begin{align*}
+      \Gamma(s)=\frac{(-1)^n}{2\pi i (s+n)}(1+O((s+n)^2))I(s)
+    \end{align*}
+    となる。$I(s)$は複素平面全体で正則なので$\Gamma(s)$は$s=-n$で高々１位の極。留数は、
+    \begin{align*}
+      \Resi_{s=-n}\Gamma(s)=\frac{(-1)^n}{2\pi i}I(-n)
+      =\frac{(-1)^n}{2\pi i}\int_{C}dz z^{-n-1}e^{z}
+      =(-1)^n\Resi_{z=0}z^{-n-1}e^{z}
+      =\frac{(-1)^n}{n!}
+    \end{align*}
+    となる。途中の変形で、今の場合にカットが消えることを用いて、留数積分で評価した。これは$0$でないので、$\Gamma(s)$は$s=-n\ (n=0,1,2,\dots)$で１位の極をもつ。ちなみに、$s=1,2,3,\dots$の場合には、カットは消え、しかも$z=0$の極もないので$I(s)=0$である。したがって、$\Gamma(s)$は$s=1,2,3,\dots$で正則である。
+    \item $\Re s>1$の場合に積分を評価する。図\ref{c1c2c3}の経路で、関数$g(z)=\frac{z^{s-1}e^{z}}{1-e^{z}}$を積分することを考える。$\Re s >1$なので、$\epsilon\to 0$の極限で$C_2$の積分は
+    \begin{align*}
+      \int_{C_2}g(z)dz\to 0
+    \end{align*}
+    となる。さらに$C_1, C_3$では、$\Re z <0$なので
+    \begin{align*}
+      \int_{C_1+C_3}g(z)dz
+      =\int_{C_1+C_3} dz \frac{z^{s-1}e^{z}}{1-e^{z}}
+      =\sum_{n=1}^{\infty}\int_{C_1+C_3} dz z^{s-1}e^{nz}\\
+      \to \sum_{n=1}^{\infty}\frac{1}{n^s}2i\sin\pi s \Gamma(s)
+      =2i\sin\pi s \Gamma(s)\zeta(s)
+    \end{align*}
+    と計算できる。途中、(1-b)の計算結果を用いた。まとめると
+    \begin{align*}
+      J(s)=2i\sin \pi s \Gamma(s)\zeta(s)
+    \end{align*}
+    を得た。これは$\Re s>1$での計算結果だが、一致の定理より、この関係式の両辺が意味がある全ての領域で成り立つ。
+    \item 先程の結果を$\zeta(s)$について解く。途中相補公式を用いると
+    \begin{align*}
+      \zeta(s)=\frac{\Gamma(1-s)}{2\pi i}J(s)
+    \end{align*}
+    を得る。これに$s=-1$を代入すればよい。$\Gamma(2)=1$なので
+    \begin{align*}
+      \zeta(-1)
+      =\frac{1}{2\pi i}J(-1)
+      =\frac{1}{2\pi i}\int_{C}\frac{z^{-2}e^{z}}{1-e^z}
+      =\Resi_{z=0}\frac{z^{-2}e^{z}}{1-e^z}
+      =-\frac{1}{12}
+    \end{align*}
+    を得る。ここではカットが消えるので留数積分で評価した。留数を求める際には原点は３位の極であることに注意する必要がある。$z^3\frac{z^{-2}e^{z}}{1-e^z}=\frac{z}{e^{-z}-1}$の$z^2$の係数が留数である。がんばってTaylor展開すると
+    \begin{align*}
+      \frac{z}{e^{-z}-1}=1+\frac 12 z - \frac{1}{12} z^2+O(z^3)
+    \end{align*}
+    となるので留数$-\frac{1}{12}$を得る。ちなみに、この手の係数はBernoulli数と呼ばれ、頻繁に登場する数である。正確には次で定義される。
+    \begin{align*}
+      \frac{x}{e^x-1}=\sum_{n=0}^{\infty}\frac{B_n}{n!}x^n.
+    \end{align*}
+    これを用いると$\zeta(-n)\ (n=0,1,2,\dots)$を表すことができる。興味があれば挑戦してみよ。
+  \end{enumerate}
+\end{enumerate}
+
+\section*{演習問題\ref{ex:ode}の解答}
+以下$A,B,C$は任意定数（積分定数）である。
+
+\begin{enumerate}
+\setlength{\itemsep}{10mm}
+\item $\displaystyle y'=x+xy^2$
+
+
+変数分離で解ける。
+\begin{align*}
+(1)\Leftrightarrow\quad &\frac{dy}{dx}=x(1+y^2),\\
+\Leftrightarrow\quad  &\int \frac{dy}{1+y^2}=\int x dx,\\
+\Leftrightarrow\quad &\arctan y=\frac12 x^2+C,\\
+\Leftrightarrow\quad &y=\tan\left(\frac12 x^2+C\right)
+\end{align*}
+となる。元の微分方程式に代入して、解になっていることを確かめることができる。
+
+参考：$\int \frac{dy}{1+y^2}=\arctan y +C$の証明。
+
+$u=\arctan y$として$\frac{du}{dy}=\frac{1}{1+y^2}$を示せばよい。実際$y=\tan u$なので$\frac{dy}{du}=\frac{1}{\cos^2u}=1+\tan^2u=1+y^2$となる。したがって、$\frac{du}{dy}=\left(\frac{dy}{du}\right)^{-1}=\frac{1}{1+y^2}$である。
+
+
+\item $\displaystyle y'=y^2+\frac{y}{x}$
+
+$x$の重みを$1$、$y$の重みを$-1$として、両辺の重みが$-2$になるので、同次型微分方程式である。
+従属変数を重み$0$の$u=xy$とすると方程式は
+\begin{align*}
+  u'=\frac{u^2+2u}{x}
+\end{align*}
+となり、変数分離で解ける。
+\begin{align*}
+    \int \frac{du}{u^2+2u}=&\int \frac{dx}{x},\\
+    \Leftrightarrow \quad& \frac12\log\frac{u}{u+2}=\log x +C,\\
+    \Leftrightarrow \quad& u=\frac{2Ax^2}{1-Ax^2},\\
+    \Leftrightarrow \quad& y=\frac{2Ax}{1-Ax^2}
+\end{align*}
+となる。元の微分方程式に代入して、解になっていることを確かめることができる。
+\item \qquad $\displaystyle y''+y'-6y=0$
+
+$y=e^{\lambda x}$を代入してみると、
+\begin{align*}
+    \lambda^2+\lambda-6=0
+\end{align*}
+という２次方程式を得る。この根は$\lambda=-3,2$なので、(3)の独立な２つの解は$e^{-3x},e^{2x}$である。したがって一般解は
+\begin{align*}
+    y=Ae^{-3x}+Be^{2x}
+\end{align*}
+である。
+
+\item $\displaystyle y''+4y'+4y=0$
+$y=e^{\lambda x}$を代入してみると、
+\begin{align*}
+    \lambda^2+4\lambda+4=0
+\end{align*}
+という２次方程式を得る。この２次方程式は重根は$\lambda=-2$の重根をもつ。したがって(4)の１つの解は$e^{-2x}$である。もう一つの解を得るために定数変化法を用いる。$y=g(x)e^{-2x}$とおいて代入すると
+\begin{align*}
+    g''=0
+\end{align*}
+という方程式を得る。$g(x)=x$というのがこれの一つの解なので(4)のもう一つの解は$y=xe^{-2x}$である。実際これを(4)に代入してみて、解になっていることを確かめることができる。一般解は
+\begin{align*}
+    y=Ae^{-2x}+Bxe^{-2x}
+\end{align*}
+である。
+
+\item $\displaystyle \mqty(y_1'\\ y_2')=\mqty(
+  2 & 2 \\
+  2 & -1
+)
+  \mqty(y_1\\y_2)
+$
+
+$M=\mqty(
+    2 & 2 \\
+    2 & -1
+  )$を対角化することを考える。固有値方程式$\det(M-\lambda I)=0$は、
+\begin{align*}
+    \lambda^2-\lambda-6=0
+\end{align*}
+であり、その根は$\lambda=3,-2$である。固有値$\lambda=3$に対応する固有ベクトルを
+$\vb_1=
+\mqty(a\\b)$とすると$M\vb_1=3\vb_1$という方程式が成り立つ。これを書くと
+\begin{align*}
+    2a+2b=3a,\quad 2a-b=3b
+\end{align*}
+と２本の方程式であるが、この２本は独立ではなく$a=2b$という一つの関係が出るのみである。$b=1$として$a=2$なので$\vb_1=\mqty(1\\2)$となる。同様にして$\lambda=-2$に対応する固有ベクトル$\vb_2$も$\vb_2=\mqty(-2\\1)$と求めることができる。
+
+これらを用いることにより
+\begin{align}
+    \mqty(y_1(x)\\ y_2(x))=u_1(x)\vb_1+u_2(x)\vb_2
+    \tag{*}\label{defu}
+\end{align}
+とおいて(5)に代入すると
+\begin{align*}
+    u_1'=3u_1,\quad u_2'=-2u_2
+\end{align*}
+という方程式が得られる。これは簡単に解けて
+\begin{align*}
+    u_1=Ae^{3x},\quad u_2=Be^{-2x}
+\end{align*}
+となるので\eqref{defu}に代入することにより
+\begin{align*}
+    \mqty(y_1(x)\\ y_2(x))=\mqty(Ae^{3x}-2Be^{-2x} \\ 2Ae^{3x}+Be^{-2x})
+\end{align*}
+を得る。
+\end{enumerate}
+
+\section*{演習問題\ref{ex:hypergeometric}の解答}
+\begin{align}
+  x(1-x)y'' + \left(c-(a+b+1)x\right)y' - aby=0\tag{＊}
+  \label{ode}
+\end{align}
+
+
+\begin{enumerate}
+\setlength{\itemsep}{10mm}
+\item べき級数の形
+\begin{align}
+  y=x^{\lambda}\sum_{n=0}^{\infty}a_{n}x^{n}\tag{♯}
+  \label{powerseriessol}
+\end{align}
+を\eqref{ode}に代入すると
+\begin{align*}
+  &x(1-x)\sum_{n=0}^{\infty}(\lambda+n)(\lambda+n-1)a_{n}x^{\lambda+n-2}\\
+  &\qquad\qquad+(c-(a+b+1)x)\sum_{n=0}^{\infty}(\lambda+n)a_{n}x^{\lambda+n-1}
+  -ab\sum_{n=0}^{\infty}a_{n}x^{\lambda+n}=0
+\end{align*}
+となる。これを整理すると
+\begin{align}
+  0=&[\lambda(\lambda-1)+c\lambda]x^{\lambda-1}
+  \nonumber\\
+  &+\sum_{n=1}^{\infty}
+  \Big(
+      (\lambda+n)(\lambda+n-1)a_n
+      -(\lambda+n-1)(\lambda+n-2)a_{n-1}
+      +c(\lambda+n)a_{n}\nonumber\\
+      &\qquad\qquad -(a+b+1)(\lambda+n-1)a_{n-1}
+      -ab a_{n}
+  \Big)x^{\lambda+n-1}\tag{☆}\label{powercondition}
+\end{align}
+最低次の項（$x^{\lambda-1}$の項）を見ることにより決定方程式
+\begin{align*}
+  \lambda(\lambda-1)+c\lambda=0
+\end{align*}
+とその解
+\begin{align*}
+  \lambda=0,1-c
+\end{align*}
+を得る。
+\item 式\eqref{powercondition}の$x^{\lambda+n-1},\ n=1,2,3,\dots$の項を見ることにより、
+\begin{align}
+  a_{n}=\frac{(a+\lambda+n-1)(b+\lambda+n-1)}{(c+\lambda+n-1)(\lambda+n)}a_{n-1},\qquad n=1,2,3,\dots
+  \tag{♡}
+  \label{recursion}
+\end{align}
+を得る。（※ $a,b,c$が一般的な値の場合には、分母は$0$にならない。あるいは$\lambda$が決定方程式の解とは限らない一般的な値の場合、分母は$0$にならない。）
+\item 漸化式\eqref{recursion}を解くと、
+\begin{align}
+  a_n(\lambda)=\frac{(a+\lambda)_n(b+\lambda)_n}{(c+\lambda)_n(\lambda+1)_n}a_0(\lambda)\tag{♤}\label{solofrec}
+\end{align}
+を得る。\eqref{powerseriessol}の形で$y(0)=1$となるのは、$\lambda=0$で$a_0=1$の場合のみである。今、$\lambda=0$は決定方程式の解なので、このような解は存在する。この場合
+\begin{align*}
+  a_n=\frac{(a)_n(b)_n}{(c)_n n!}
+\end{align*}
+となる。ここで $(1)_n=n!$ を用いた。したがって
+\begin{align*}
+  \HG(a,b,c;x)=\sum_{n=0}^{\infty}\frac{(a)_n(b)_n}{(c)_n n!}x^{n}
+\end{align*}
+となる。
+\item $a,b,c$が一般的な値の場合、決定方程式のもう一つの根$\lambda=1-c$が、もう一つの解を与える。\eqref{solofrec}に代入し、$a_0=1$とすることで
+\begin{align*}
+  a_n=\frac{(a-c+1)_n(b-c+1)_n}{(2-c)_n n!}
+\end{align*}
+となるので、
+\begin{align*}
+  y(x)=x^{1-c}\HG(a-c+1,b-c+1,2-c;x)
+\end{align*}
+がもう一つの解である。
+\item $a=0,b=0,c=1$の場合を考えてみる。この場合、決定方程式は重根$\lambda=0$を持つので、上で求めた方法では二つめの解を求めることができない。これを求めるためにフロベニウスの方法を適用してみる。$a_0(\lambda)=1$として\eqref{solofrec}に代入すると
+\begin{align*}
+  a_n(\lambda)
+  =\frac{(\lambda)_n(\lambda)_n}{(1+\lambda)_n(\lambda+1)_n}
+  =\left[\frac{(\lambda)_n}{(\lambda+1)_n}\right]^2
+  =\left[\frac{\lambda(\lambda+1)\dots (\lambda+n-1)}{(\lambda+1)(\lambda+2)\dots (\lambda+n)}\right]^2
+  =\frac{\lambda^2}{(\lambda+n)^2}
+  ,\\
+  n=1,2,3,\dots
+\end{align*}
+となる。なのでフロベニウスの方法に出てくる補助的な関数$y(x,\lambda)$は、
+\begin{align*}
+  y(x,\lambda)=x^{\lambda}\sum_{n=0}^{\infty}\frac{\lambda^2}{(\lambda+n)^2} x^n
+\end{align*}
+となる。１つめの解は、単に決定方程式の解$\lambda=0$を代入すれば得られる。$a_0=1,a_n(\lambda=0)=0,\ n=1,2,3,\dots$に注意すると
+\begin{align*}
+  y_1(x)=1
+\end{align*}
+が一つの解である。もう一つの解は、
+\begin{align*}
+  y_2(x)=\pdv{\lambda} y(x,\lambda)|_{\lambda=0}
+  =\log x
+\end{align*}
+である。ここで$\pdv{\lambda} \frac{\lambda^2}{(\lambda+n)^2}|_{\lambda=0}=0$であることを用いた。
+
+実際\eqref{ode}に$a=b=0,c=1$を代入してみると、
+\begin{align*}
+  x(1-x)y''+(1-x)y'=0\qquad \Rightarrow \qquad
+  x y''+y'=0
+\end{align*}
+となる。$y=1$と$y=\log x$はともにこの微分方程式の解であることは簡単にチェックできる。
+
+\textbf{(別の例)}　$a=b=0,\ c=2$ の場合、決定方程式の二つの解は、$\lambda=0,-1$である。しかし、\eqref{recursion}で$\lambda=-1,n=1$のときに分母が$0$となり分子は$0$でないので、これを満たすような$a_1$は存在しないので、もう一つの解は\eqref{powerseriesex}の形では得られない。なのでフロベニウスの方法を用いる。
+$a_0(\lambda)=\lambda+1$として\eqref{recursion}を解くと、
+\begin{align}
+  a_0(\lambda)=\lambda+1,\quad a_1(\lambda)=\frac{\lambda^2}{\lambda+2}
+  \quad a_n(\lambda)=\frac{\lambda^2(\lambda+1)^2}{(\lambda+n)^2(\lambda+n+1)}
+  \label{eg2al}\tag{♮}
+\end{align}
+となる。フロベニウスの方法に使う補助的な関数は、
+\begin{align*}
+  y(x,\lambda)=x^{\lambda}\sum_{n=0}^{\infty}a_n(\lambda)x^n
+\end{align*}
+となる。ここで$\lambda=0$を代入してみると
+\begin{align*}
+  a_0(0)=1,\quad a_n(0)=0,\quad n\ge 1
+\end{align*}
+となるので、一つの解は$y_1(x)=y(x,0)=1$である。ちなみに、$\lambda=-1$を試しに入れてみると、
+\begin{align*}
+  a_0(-1)=0,\quad a_1(-1)=1,\quad a_n(-1)=0,\quad n\ge 2
+\end{align*}
+となるので、$y(x,-1)=1=y_1(x)$となって、新しい解は得られない。フロベニウスの方法の一般論にしたがって、もう一つの解は
+\begin{align*}
+  y_2(x)=\pdv{\lambda}y(x,\lambda)|_{\lambda=-1}
+  =\log x +x^{-1}\sum_{n=0}^{\infty}\pdv{\lambda}a_n(\lambda)|_{\lambda=-1}x^n
+  =\log x + \frac{1}{x}-3
+\end{align*}
+となる。最後の変形では、表式\eqref{eg2al}より
+\begin{align*}
+  \pdv{\lambda}a_0(\lambda)|_{\lambda=-1}=1,\qquad
+  \pdv{\lambda}a_1(\lambda)|_{\lambda=-1}=-3,\qquad
+  \pdv{\lambda}a_n(\lambda)|_{\lambda=-1}=0,\qquad n\ge 2
+\end{align*}
+という計算結果を用いた。
+
+これらが、実際に解であることは、$a=b=0,\ c=2$ のときの\eqref{ode}の式
+\begin{align*}
+  x(1-x)y''+(2-x)y'=0
+\end{align*}
+に代入することで確かめることができる。
+\end{enumerate}
+
 
 \end{document}
